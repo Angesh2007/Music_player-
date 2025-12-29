@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Starboy Player (CSS Only)</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Inter', sans-serif;
+}
+
+body{
+  height:100vh;
+  background:#0f0f0f;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+}
+
+/* Player */
+.player{
+  width:340px;
+  background:#161616;
+  padding:22px;
+  border-radius:14px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.6);
+}
+
+/* Hide checkbox */
+#toggle{
+  display:none;
+}
+
+/* Album Cover */
+.cover{
+  width:100%;
+  aspect-ratio:1/1;
+  border-radius:10px;
+  overflow:hidden;
+  margin-bottom:16px;
+}
+
+.cover img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* Rotate only when playing */
+#toggle:checked ~ .cover img{
+  animation: spin 6s linear infinite;
+}
+
+@keyframes spin{
+  from{ transform:rotate(0deg); }
+  to{ transform:rotate(360deg); }
+}
+
+/* Song Info */
+.header{
+  text-align:center;
+  margin-bottom:18px;
+}
+
+.header h1{
+  font-size:17px;
+  font-weight:600;
+}
+
+.header p{
+  font-size:13px;
+  color:#aaa;
+  margin-top:4px;
+}
+
+/* Progress */
+.progress-area{
+  margin:18px 0;
+}
+
+.progress-bar{
+  width:100%;
+  height:4px;
+  background:#2a2a2a;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.progress{
+  width:0%;
+  height:100%;
+  background:#e10600;
+}
+
+/* Animate progress only when playing */
+#toggle:checked ~ .progress-area .progress{
+  animation: progressMove 15s linear infinite;
+}
+
+@keyframes progressMove{
+  from{ width:0%; }
+  to{ width:100%; }
+}
+
+.time{
+  display:flex;
+  justify-content:space-between;
+  font-size:12px;
+  color:#999;
+  margin-top:6px;
+}
+
+/* Controls */
+.controls{
+  display:flex;
+  justify-content:space-between;
+  margin-top:18px;
+}
+
+.controls label,
+.controls button{
+  flex:1;
+  margin:0 6px;
+  padding:10px 0;
+  background:#222;
+  border:none;
+  color:#fff;
+  font-size:13px;
+  letter-spacing:1px;
+  border-radius:6px;
+  text-align:center;
+}
+
+/* Play / Pause toggle text */
+.play::before{
+  content:"PLAY";
+}
+
+#toggle:checked ~ .controls .play::before{
+  content:"PAUSE";
+}
+
+.play{
+  background:#e10600;
+  color:#000;
+  font-weight:600;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="player">
+
+  <!-- Checkbox hack -->
+  <input type="checkbox" id="toggle">
+
+  <!-- Album -->
+  <div class="cover">
+    <img src="./starboy.jpg" alt="Starboy Album Cover">
+  </div>
+
+  <!-- Info -->
+  <div class="header">
+    <h1>Starboy</h1>
+    <p>The Weeknd</p>
+  </div>
+
+  <!-- Progress -->
+  <div class="progress-area">
+    <div class="progress-bar">
+      <div class="progress"></div>
+    </div>
+    <div class="time">
+      <span>0:00</span>
+      <span>3:50</span>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <button>PREV</button>
+    <label for="toggle" class="play"></label>
+    <button>NEXT</button>
+  </div>
+
+</div>
+
+</body>
+</html>
